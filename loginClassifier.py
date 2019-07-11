@@ -37,13 +37,10 @@ def getXml():
     for p in pr:
         #print(p+'\n')
         #extracting only VIEWs
-        #!!!fix this part!!!
-        if view in class of p:
-            li.append(p)
-    for p in li:
-        ll = p.split(' ').split('=')
-        if ll[0] in lll:
-            li.remove(l)
-
+        #!!!fix this part view in class of p로 바꾸기!!!
+        if 'view' in p:
+            ll = p.split(' ')[0].split('=')
+            if ll[0] not in lll:
+                li.append(p)    
     
 getXml()
