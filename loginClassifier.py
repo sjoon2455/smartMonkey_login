@@ -32,7 +32,6 @@ def getXml():
     )
     out, err = proc.communicate()
     pr = out.decode('utf-8').split('<')
-    li = ''
     parsedList = []
     omit = ['index', 'class', 'package', 'checkable', 'checked', 'clickable', 'enabled', 'focusable', 'focused', 'scrollable', 'long-clickable', 'password', 'selected', 'bounds', ]
     #print(pr)
@@ -40,9 +39,12 @@ def getXml():
         #print(p+'\n')
         #extracting only VIEWs
         #!!!fix this part view in class of p로 바꾸기!!!
-        if 'view' in p:
+        li = ''
+        if 'view' in p or 'View' in p:
             ll = p.split(' ')
+            #print(ll)
             for l in ll:
+                #print(l)
                 count = 0
                 for ele in omit:
                     if ele in l:
