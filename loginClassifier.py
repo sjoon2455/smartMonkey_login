@@ -1,9 +1,6 @@
 #-*- coding:utf-8 -*-
-# xml parsing
-from __future__ import print_function
 import subprocess
-
-# get xml file
+# 1. get xml & parsing
 def getXml():
     cmd = "adb shell uiautomator dump"
     proc = subprocess.Popen(
@@ -59,3 +56,5 @@ def getXml():
         print(i+'\n')
 
 getXml()
+
+#
