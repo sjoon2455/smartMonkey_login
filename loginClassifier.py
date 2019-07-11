@@ -55,6 +55,7 @@ def getXml():
             parsedList.append(li)            
 
     for i in parsedList:
+        i = i[5:-3]
         print(i+'\n')
 
 getXml()
