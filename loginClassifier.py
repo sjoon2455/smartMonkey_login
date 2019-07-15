@@ -35,9 +35,9 @@ def getXml():
     for p in pr:
         #print(p+'\n')
         #extracting only VIEWs
-        #!!!fix this part view in class of p로 바꾸기!!!
         li = ''
-        if 'view' in p or 'View' in p:
+        if isViewClass(p):
+        #if 'view' in p or 'View' in p:
             ll = p.split(' ')
             #print(ll)
             for l in ll:
@@ -55,6 +55,28 @@ def getXml():
         i = i[5:-3]
         print(i+'\n')
 
-getXml()
+# boolean function, whether a class of p is view(or View)
+def isViewClass(p):
+    if "class="" in p:
+        ps = p.split('class="')
+        for i in len(ps[1]):
+            if ps[1][i] == '"':
+                index = i
+                break
+            else:
+                return 0
+        if 'view' in ps[1][:index] or 'View' in ps[1][:index]:
+            return 1
+    else:
+        return 0
 
-#
+def camelCaseBreak():
+    return 1
+def removeStopWords():
+    return 1
+def stemming():
+    return 1
+def computeTf():
+    return 1
+    
+getXml()
