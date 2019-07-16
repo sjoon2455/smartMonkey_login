@@ -1,3 +1,4 @@
 Out of 20 apps that are manually chosen and requires login information,
-one app (facebook) didn't show any information of login in the GUI,
-one app (quora) was popup.
+two apps (facebook, tumblr) didn't show any information of login in the GUI,
+one app (quora) was popup,
+
