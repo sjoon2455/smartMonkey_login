@@ -10,7 +10,7 @@ def dumpXml():
         stdout = subprocess.PIPE,
         stderr = subprocess.PIPE
     )
-    out, err = proc.communicate()
+    #out, err = proc.communicate()
 
     cmd = "adb pull /sdcard/window_dump.xml"
     proc = subprocess.Popen(
@@ -31,7 +31,7 @@ def dumpXml():
     pr = out.decode('utf-8')
     print(pr)
 
-    cmd = "mv window_dump.xml window_dump_{0}.xml".format(datetime.datetime.now().time())
+    cmd = "mv window_dump.xml xmlDump/window_dump_{0}.xml".format(datetime.datetime.now().time())
     proc = subprocess.Popen(
         cmd,
         shell = True,
