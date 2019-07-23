@@ -28,10 +28,18 @@ def getXml():
         stderr = subprocess.PIPE
     )
     out, err = proc.communicate()
-    pr = out.decode('utf-8').split('<')
-    parsedList = []
     omit = ['index', 'class', 'package', 'checkable', 'checked', 'clickable', 'enabled', 'focusable', 'focused', 'scrollable', 'long-clickable', 'password', 'selected', 'bounds', ]
-    #print(pr)
+    parsedList = parseXml(out, omit)
+    for i in parsedList:
+        print(i+'\n')
+
+
+# input: .txt xml file, attributes to be omitted
+# output: .txt parsed xml file
+# parse the given xml
+def parseXml(xml, omit):
+    pr = xml.decode('utf-8').split('<')
+    parsedList = []
     for p in pr:
         #print(p+'\n')
         #extracting only VIEWs
@@ -49,11 +57,10 @@ def getXml():
                 if count == 0:
                     #print(l)
                     li += l+" "
-            parsedList.append(li)            
-
+            parsedList.append(li)
     for i in parsedList:
         i = i[5:-3]
-        print(i+'\n')
+    return parsedList
 
 # boolean function, whether a class of p is view(or View)
 def isViewClass(p):
