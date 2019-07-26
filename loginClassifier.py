@@ -32,6 +32,8 @@ def getXml():
     parsedList = parseXml(out, omit)
     for i in parsedList:
         print(i+'\n')
+    return parsedList
+    
 
 
 # input: .txt xml file, attributes to be omitted
@@ -41,37 +43,33 @@ def parseXml(xml, omit):
     pr = xml.decode('utf-8').split('<')
     parsedList = []
     for p in pr:
-        #print(p+'\n')
         #extracting only VIEWs
         li = ''
         if isViewClass(p):
         #if 'view' in p or 'View' in p:
             ll = p.split(' ')
-            #print(ll)
             for l in ll:
-                #print(l)
                 count = 0
                 for ele in omit:
                     if ele in l:
                         count += 1
                 if count == 0:
-                    #print(l)
                     li += l+" "
-            parsedList.append(li)
-    for i in parsedList:
-        i = i[5:-3]
+            parsedList.append(li)   
+    
+    parsedList = [i[5:-3] if i[-2] == ">" else i[5:] for i in parsedList] 
     return parsedList
 
-# boolean function, whether a class of p is view(or View)
+### boolean function, whether a class of p is view(or View)
+### input: xml file
+### output: boolean
 def isViewClass(p):
-    if "class="" in p:
+    if 'class="' in p:
         ps = p.split('class="')
-        for i in len(ps[1]):
+        for i in range(len(ps[1])):
             if ps[1][i] == '"':
                 index = i
                 break
-            else:
-                return 0
         if 'view' in ps[1][:index] or 'View' in ps[1][:index]:
             return 1
     else:
