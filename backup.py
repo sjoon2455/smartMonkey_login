@@ -1,15 +1,43 @@
+#backup.py
+
 #-*- coding:utf-8 -*-
 import subprocess
 from dumpXml import dumpXml
 # 1. get xml & parsing
 def getXml():
-    out = dumpXml()
-    omit = ['index', 'package', 'checkable', 'checked', 'clickable', 'enabled', 'focusable', 'focused', 'scrollable', 'long-clickable', 'password', 'selected', 'bounds', ]
+    cmd = "adb shell uiautomator dump"
+    proc = subprocess.Popen(
+        cmd,
+        shell = True,
+        stdout = subprocess.PIPE,
+        stderr = subprocess.PIPE
+    )
+    out, err = proc.communicate()
+    '''
+    cmd = "adb pull /sdcard/window_dump.xml"
+    proc = subprocess.Popen(
+        cmd,
+        shell = True,
+        stdout = subprocess.PIPE,
+        stderr = subprocess.PIPE
+    )
+    #out, err = proc.communicate()
+    '''
+    cmd = "adb shell cat /sdcard/window_dump.xml"
+    proc = subprocess.Popen(
+        cmd,
+        shell = True,
+        stdout = subprocess.PIPE,
+        stderr = subprocess.PIPE
+    )
+    out, err = proc.communicate()
+    omit = ['index', 'class', 'package', 'checkable', 'checked', 'clickable', 'enabled', 'focusable', 'focused', 'scrollable', 'long-clickable', 'password', 'selected', 'bounds', ]
     parsedList = parseXml(out, omit)
     for i in parsedList:
         print(i+'\n')
     return parsedList
     
+
 
 # input: .txt xml file, attributes to be omitted
 # output: .txt parsed xml file
