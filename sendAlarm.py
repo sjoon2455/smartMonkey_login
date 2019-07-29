@@ -4,7 +4,7 @@ import psutil
 from typeIdPwd import typeIdPwd
 ### during some job... if loginpage occured, this function need to be called
 
-def suspendAlarmResume():
+def suspendAlarmResume(xml):
     currentpid = psutil.getPid(some process) #get current pid
     p = psutil.Process(currentpid)
     
@@ -13,5 +13,5 @@ def suspendAlarmResume():
     ### get id, pwd from user and type them in. 
     user_id = input("ID: ")
     user_pw = input("PASSWORD: \n(If none, press return button with empty input)")
-    typeIdPwd(user_id, user_pw)
+    typeIdPwd(xml, user_id, user_pw)
     p.resume()

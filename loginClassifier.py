@@ -1,7 +1,21 @@
 #-*- coding:utf-8 -*-
 import subprocess
 from dumpXml import dumpXml
-# 1. get xml & parsing
+from sendAlarm import sendAlarm
+
+
+
+def main():
+    xml = getXml()
+    #이 알고리즘을 짜야함. xml에 로그인이 있으면? 등등으로. 그래서 불리안으로 넘겨주고,
+    if loginGUI(xml):
+        suspendAlarmResume(xml)
+
+def loginGUI(xml):
+    return 1
+
+
+# get xml & parsing
 def getXml():
     out = dumpXml()
     omit = ['index', 'package', 'checkable', 'checked', 'clickable', 'enabled', 'focusable', 'focused', 'scrollable', 'long-clickable', 'password', 'selected', 'bounds', ]
@@ -49,18 +63,3 @@ def isViewClass(p):
             return 1
     else:
         return 0
-
-
-def isEditTextClass(p):
-    if 'class="' in p:
-        ps = p.split('class="')
-        for i in range(len(ps[1])):
-            if ps[1][i] == '"':
-                index = i
-                break
-        if 'EditText' in ps[1][:index]:
-            return 1
-    else:
-        return 0
-    
-getXml()
