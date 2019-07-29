@@ -50,13 +50,17 @@ def isViewClass(p):
     else:
         return 0
 
-def camelCaseBreak():
-    return 1
-def removeStopWords():
-    return 1
-def stemming():
-    return 1
-def computeTf():
-    return 1
+
+def isEditTextClass(p):
+    if 'class="' in p:
+        ps = p.split('class="')
+        for i in range(len(ps[1])):
+            if ps[1][i] == '"':
+                index = i
+                break
+        if 'EditText' in ps[1][:index]:
+            return 1
+    else:
+        return 0
     
 getXml()
