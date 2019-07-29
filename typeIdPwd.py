@@ -6,16 +6,18 @@ from locateIdPwd import locateId, locatePwd
 
 
 def typeIdPwd(xml, id, pwd):
-    if numEditText(xml) == 1:
-        pos = locateId()
-        typeToPos(id, pos)
+    list_of_editText = getEditText(xml)
+    numEditText = len(list_of_editText)
+    if numEditText == 1:
+        pos = locateId(list_of_editText)
+        typeToPos(id)
         global id = pwd
 
     elif numEditText(xml) == 2:
-        posId = locateId()
-        typeToPos(id, posId)
-        posPwd = locatePwd()
-        typeToPos(pwd, posPwd)
+        posId = locateId(list_of_editText)
+        typeToPos(id)
+        posPwd = locatePwd(list_of_editText)
+        typeToPos(pwd)
     
     else:
         return 1
@@ -50,20 +52,12 @@ def isEditTextClass(p):
         return 0
 
 def typeToPos(idOrPwd, pos):
-    cmd = "adb shell input tap {0}".format(pos)
+    cmd = 'adb shell input text "{0}"'.format(idOrPwd)
     proc = subprocess.Popen(
         cmd,
         shell = True,
         stdout = subprocess.PIPE,
         stderr = subprocess.PIPE
     )
-    #out, err = proc.communicate()
-
-    cmd = "adb shell input text '{0}'".format(idOrPwd)
-    proc = subprocess.Popen(
-        cmd,
-        shell = True,
-        stdout = subprocess.PIPE,
-        stderr = subprocess.PIPE
-    )
-    #out, err = proc.communicate()
+    out, err = proc.communicate()
+    print("--------------Successfully typed in!--------------")
