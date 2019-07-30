@@ -9,19 +9,20 @@ def typeIdPwd(xml, id, pwd):
     list_of_editText = getEditText(xml)
     numEditText = len(list_of_editText)
     if numEditText == 1:
-        pos = locateId(list_of_editText)
+        locateId(list_of_editText)
         typeToPos(id)
-        global id = pwd
+        global id
+        id = pwd
 
-    elif numEditText(xml) == 2:
-        posId = locateId(list_of_editText)
+    elif numEditText == 2:
+        locateId(list_of_editText)
         typeToPos(id)
-        posPwd = locatePwd(list_of_editText)
+        locatePwd(list_of_editText)
         typeToPos(pwd)
     
     else:
         return 1
-        #이런 경우가 있나?
+        #이런 경우가 있긴 함..Flo ㅠ
 
 
 def getEditText(xml):

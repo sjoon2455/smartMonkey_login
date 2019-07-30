@@ -1,11 +1,12 @@
 #-*- coding:utf-8 -*-
 import subprocess
+import os
 import psutil
 from typeIdPwd import typeIdPwd
 ### during some job... if loginpage occured, this function need to be called
 
 def suspendAlarmResume(xml):
-    currentpid = psutil.getPid(some process) #get current pid
+    currentpid = os.getpid() #get current pid
     p = psutil.Process(currentpid)
     
     p.suspend()

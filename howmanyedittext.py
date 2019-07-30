@@ -36,6 +36,7 @@ def main():
     os.chdir(cwd)
     directory = os.fsencode(cwd)
     #print(os.getcwd())
+    
     for file in os.listdir(directory):
         filename = os.fsdecode(file)
         #print(filename)
@@ -49,7 +50,8 @@ def main():
             )
             out, err = proc.communicate()            
             
-            print(numEditText(out))
+            print(filename,' - ',numEditText(out))
+            
             
 main()
 

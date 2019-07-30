@@ -1,33 +1,36 @@
 #-*- coding:utf-8 -*-
 import subprocess
 from dumpXml import dumpXml
-from sendAlarm import sendAlarm
+from sendAlarm import suspendAlarmResume
 
 
 
 def main():
     xml = getXml()
     #이 알고리즘을 짜야함. xml에 로그인이 있으면? 등등으로. 그래서 불리안으로 넘겨주고,
-    if loginGUI(xml):
+    if isLoginGUI(xml):
         suspendAlarmResume(xml)
 
-def loginGUI(xml):
+def isLoginGUI(xml):
     return 1
 
 
-# get xml & parsing
+### get xml & parsing
+### input: none
+### output: list of string
 def getXml():
     out = dumpXml()
     omit = ['index', 'package', 'checkable', 'checked', 'clickable', 'enabled', 'focusable', 'focused', 'scrollable', 'long-clickable', 'password', 'selected', 'bounds', ]
     parsedList = parseXml(out, omit)
     for i in parsedList:
         print(i+'\n')
+    print('--------------Getting xml hierarchy and parsing...--------------')
     return parsedList
     
 
-# input: .txt xml file, attributes to be omitted
-# output: .txt parsed xml file
-# parse the given xml
+### parse the given xml
+### input: bytes xml file, attributes to be omitted
+### output: .txt parsed xml file
 def parseXml(xml, omit):
     pr = xml.decode('utf-8').split('<')
     parsedList = []
@@ -50,7 +53,7 @@ def parseXml(xml, omit):
     return parsedList
 
 ### boolean function, whether a class of p is view(or View)
-### input: xml file
+### input: string(each node of xml file)
 ### output: boolean
 def isViewClass(p):
     if 'class="' in p:

@@ -31,6 +31,8 @@ def locateId(list_of_EditText):
         stdout = subprocess.PIPE,
         stderr = subprocess.PIPE
     )
+    print('----------------Entering ID.....----------------')
+    return 1
 
 
 def locatePwd(list_of_EditText):
@@ -60,6 +62,8 @@ def locatePwd(list_of_EditText):
         stdout = subprocess.PIPE,
         stderr = subprocess.PIPE
     )
+    print('----------------Entering PWD.....----------------')
+    return 1
 
 #input: [...class="...EditText"..., ..., ....] list of string
 #output: [각각의 EditText에서의 bounds] list of string
