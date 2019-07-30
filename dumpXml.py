@@ -40,6 +40,6 @@ def dumpXml():
         stderr = subprocess.PIPE
     )
 
-    return out
+    print(type(out))
 
-#dumpXml()
+dumpXml()
