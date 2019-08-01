@@ -1,8 +1,6 @@
 #-*- coding:utf-8 -*-
 import subprocess
 ### xml dump 한 걸로 editText 개수 찾아냄, 한 개면 ID만 넣고, 두 개면 ID, PWD
-### 이제 그 위치를 찾아내야 하는데 무슨 수로 하지?
-            
 
 def locateId(list_of_EditText):
     index = 0
@@ -72,6 +70,7 @@ def getBound(list_of_EditText):
     index = 0
     for i in list_of_EditText:
         if 'bounds' not in i:
+            #continue 가 아니라 이건 그냥 이상한거니깐 break
             break
         else:
             isplit = i.split('bounds="')
