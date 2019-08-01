@@ -12,8 +12,8 @@ def typeIdPwd(parsedList, id, pwd):
         locateId(list_of_editText)
         typeToPos(id)
         # 몇몇 경우엔 id 먼저 치고, 다음 화면에서 비밀번호를 친다
-        global id
-        id = pwd
+        #global id
+        #id = pwd
 
     elif numEditText == 2:
         locateId(list_of_editText)

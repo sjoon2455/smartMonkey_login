@@ -2,8 +2,9 @@
 import subprocess
 import datetime
 
-#input: none
-#output: bytes xml file
+### input: -
+### output: bytes xml file
+### dump current GUI xml file
 def dumpXml():
     cmd = "adb shell uiautomator dump"
     proc = subprocess.Popen(

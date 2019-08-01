@@ -5,10 +5,12 @@ from sendAlarm import suspendAlarmResume
 
 
 ### main function!
+### get current GUI xml. If it's login page, do what I want.
 def main():
-    xmlList = getXml()
+    xml = dumpXml()
     #이 알고리즘을 짜야함. xml에 로그인이 있으면? 등등으로. 그래서 불리안으로 넘겨주고,
-    if isLoginGUI(xmlList):
+    if isLoginGUI(xml):
+        xmlList = getXml()
         suspendAlarmResume(xmlList)
 
 
@@ -16,7 +18,25 @@ def main():
 ### input: xml 
 ### output: boolean
 def isLoginGUI(xml):
-    return 1
+    omit = ['index', 'package', 'checkable', 'checked', 'clickable', 'enabled', 'focusable', 'focused', 'scrollable', 'long-clickable', 'password', 'selected', 'bounds', ]
+    parsedList = parseXml(xml, omit)
+    count = 0
+    for p in parsedList:
+        #if 'Login' or 'login' or 'Log in' or 'log in' or 'password' or 'PASSWORD' or '비밀번호' or '로그인' in p:
+        #if 'Login' or 'login' or 'Log in' or 'log in' or 'password' or 'PASSWORD' or '비밀번호' in p:
+        #if 'Login' or 'login' or 'Log in' or 'log in' or 'password' or 'PASSWORD' in p:
+        #if 'Login' or 'login' or 'Log in' or 'log in' or 'password' in p:
+        #if 'Login' or 'login' or 'Log in' or 'log in' in p:
+        #if 'Login' or 'login' or 'Log in' in p:
+        if 'Login' or 'login' in p:
+        #if 'login' in p:
+            count += 1
+    if count > 0:
+        return 1
+    else:
+        return 0
+
+
 
 
 ### get xml & parsing

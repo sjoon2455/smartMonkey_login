@@ -1,5 +1,9 @@
 import os
 import subprocess
+from loginClassifier import parseXml
+
+
+
 
 def isEditTextClass(p):
     if 'class="' in p:
@@ -31,6 +35,48 @@ def numEditText(xml):
     #print(list_of_editText)
     return len(list_of_editText)  
 
+
+def isLoginGUI(xml):
+    omit = ['index', 'package', 'checkable', 'checked', 'clickable', 'enabled', 'focusable', 'focused', 'scrollable', 'long-clickable', 'password', 'selected', 'bounds', ]
+    parsedList = parseXml(xml, omit)
+    count = 0
+    for p in parsedList:
+        #if 'Login' or 'login' or 'Log in' or 'log in' or 'password' or 'PASSWORD' or '비밀번호' or '로그인' in p:
+        #if 'Login' or 'login' or 'Log in' or 'log in' or 'password' or 'PASSWORD' or '비밀번호' in p:
+        #if 'Login' or 'login' or 'Log in' or 'log in' or 'password' or 'PASSWORD' in p:
+        #if 'Login' or 'login' or 'Log in' or 'log in' or 'password' in p:
+        #if 'Login' or 'login' or 'Log in' or 'log in' in p:
+        #if 'Login' or 'login' or 'Log in' in p:
+        if 'Login' or 'login' in p:
+        #if 'login' in p:
+            count += 1
+    if count > 0:
+        return 'YES!!!!!!!!!!!'
+    else:
+        return 'ㅠㅠ'
+            
+        
+
+def main2():
+    cwd = os.getcwd() + '/xmlDump'
+    os.chdir(cwd)
+    directory = os.fsencode(cwd)
+    
+    for file in os.listdir(directory):
+        filename = os.fsdecode(file)
+        if filename.endswith(".xml"): 
+            cmd = 'cat {0}'.format(filename)
+            proc = subprocess.Popen(
+                cmd, 
+                shell = True,
+                stdout = subprocess.PIPE,
+                stderr = subprocess.PIPE
+            )
+            out, err = proc.communicate()
+
+            print(filename, " - ", isLoginGUI(out))
+    
+
 def main():
     cwd = os.getcwd() + '/xmlDump'
     os.chdir(cwd)
@@ -53,7 +99,7 @@ def main():
             print(filename,' - ',numEditText(out))
             
             
-main()
+main2()
 
 
 
