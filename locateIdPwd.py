@@ -2,6 +2,9 @@
 import subprocess
 ### xml dump 한 걸로 editText 개수 찾아냄, 한 개면 ID만 넣고, 두 개면 ID, PWD
 
+### input: list of string, node with class of EditText
+### output: -
+### locate where to type in ID. Then, tap the input box.
 def locateId(list_of_EditText):
     index = 0
     id_pos = ''
@@ -33,6 +36,9 @@ def locateId(list_of_EditText):
     return 1
 
 
+### input: list of string, node with class of EditText
+### output: -
+### locate where to type in PWD. Then, tap the input box.
 def locatePwd(list_of_EditText):
     index = 0
     id_pos = ''
@@ -63,8 +69,10 @@ def locatePwd(list_of_EditText):
     print('----------------Entering PWD.....----------------')
     return 1
 
-#input: [...class="...EditText"..., ..., ....] list of string
-#output: [각각의 EditText에서의 bounds] list of string
+
+### input: [...class="...EditText"..., ..., ....] list of string
+### output: [각각의 EditText에서의 bounds] list of string
+### For each node with editText class, get bound(x1~x2, y1~y2)
 def getBound(list_of_EditText):
     bounds = []
     index = 0
@@ -83,8 +91,9 @@ def getBound(list_of_EditText):
 
 
 
-#input: '[0,147]'
-#output: '|0-147|/2'
+### input: '[0,147]'
+### output: '|0-147|/2'
+### helper function for returning median value for a given string
 def getMedian(str):
     index = 0
     for i in str:
