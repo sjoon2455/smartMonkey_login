@@ -16,14 +16,14 @@ def locateId(list_of_EditText):
         if i == "]":
             break
 
-    idBound_x = idBound[:index]
-    idBound_y = idBound[index:]
+    idBound_x1y1 = idBound[:index]
+    idBound_x2y2 = idBound[index:]
     #[0,147][1080,1647]
-    #idBound_x = '[0,147]'
-    #idBound_y = '[1080,1647]'
+    #idBound_x1y1 = '[0,147]'
+    #idBound_x2y2 = '[1080,1647]'
     #id_pos = '73 1363'
-    id_pos += getMedian(idBound_x) + " "
-    id_pos += getMedian(idBound_y)
+    id_pos += getMedian(idBound_x1y1) + " "
+    id_pos += getMedian(idBound_x2y2)
 
     cmd = 'adb shell input tap {0}'.format(id_pos)
     proc = subprocess.Popen(
@@ -50,14 +50,18 @@ def locatePwd(list_of_EditText):
         if i == "]":
             break
 
-    idBound_x = idBound[:index]
-    idBound_y = idBound[index:]
+    idBound_x1y1 = idBound[:index]
+    idBound_x2y2 = idBound[index:]
     #[0,147][1080,1647]
-    #idBound_x = '[0,147]'
-    #idBound_y = '[1080,1647]'
-    #id_pos = '73 1363'
-    id_pos += getMedian(idBound_x) + " "
-    id_pos += getMedian(idBound_y)
+    #idBound_x1y1 = '[0,147]'
+    #idBound_x2y2 = '[1080,1647]'
+    #id_pos = '540 897'
+    list_x1y1 = parseList(idBound_x1y1)
+    list_x2y2 = parseList(idBound_x2y2)
+    median_x = getMedian(list_x1y1[0], list_x2y2[0])
+    median_y = getMedian(list_x1y1[1], list_x2y2[1])
+    id_pos += median_x + " " + median_y
+    
 
     cmd = 'adb shell input tap {0}'.format(id_pos)
     proc = subprocess.Popen(
@@ -89,20 +93,19 @@ def getBound(list_of_EditText):
             bounds.append(isplit[1][:index])
                     
 
-
-
 ### input: '[0,147]'
-### output: '|0-147|/2'
-### helper function for returning median value for a given string
-def getMedian(str):
-    index = 0
-    for i in str:
-        index += 1
-        if i == ",":
-            break
-    num1 = int(str[1:index-1])
-    num2 = int(str[index:-1])
-    med = (num1 - num2)/2
-    return str(abs(med))
+### output: [0, 147]
+### helper function for un-stringifiy-ing for a given string 
+def parseList(str):
+    noBracket_str = str[1:-1]
+    res = noBracket_str.split(",")
+    res = [int(i)  for i in res] 
+
+
+### input: int int
+### output: int
+### helper function for getting median for given two ints
+def getMedian(a, b):
+    return (a+b)/2
     
 
