@@ -22,8 +22,11 @@ def locateId(list_of_EditText):
     #idBound_x1y1 = '[0,147]'
     #idBound_x2y2 = '[1080,1647]'
     #id_pos = '73 1363'
-    id_pos += getMedian(idBound_x1y1) + " "
-    id_pos += getMedian(idBound_x2y2)
+    list_x1y1 = parseList(idBound_x1y1)
+    list_x2y2 = parseList(idBound_x2y2)
+    median_x = getMedian(list_x1y1[0], list_x2y2[0])
+    median_y = getMedian(list_x1y1[1], list_x2y2[1])
+    id_pos += median_x + " " + median_y
 
     cmd = 'adb shell input tap {0}'.format(id_pos)
     proc = subprocess.Popen(
@@ -55,15 +58,15 @@ def locatePwd(list_of_EditText):
     #[0,147][1080,1647]
     #idBound_x1y1 = '[0,147]'
     #idBound_x2y2 = '[1080,1647]'
-    #id_pos = '540 897'
+    #pwd_pos = '540 897'
     list_x1y1 = parseList(idBound_x1y1)
     list_x2y2 = parseList(idBound_x2y2)
     median_x = getMedian(list_x1y1[0], list_x2y2[0])
     median_y = getMedian(list_x1y1[1], list_x2y2[1])
-    id_pos += median_x + " " + median_y
+    pwd_pos += median_x + " " + median_y
     
 
-    cmd = 'adb shell input tap {0}'.format(id_pos)
+    cmd = 'adb shell input tap {0}'.format(pwd_pos)
     proc = subprocess.Popen(
         cmd,
         shell = True,
