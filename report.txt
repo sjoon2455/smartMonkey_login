@@ -1,6 +1,7 @@
 Out of 20 apps that are manually chosen and requires login information,
-two apps (facebook, tumblr) didn't show any information of login in the GUI,
-one app (quora) was popup,
+quora: popup (does it matter?)
+facebook: 노답
+pinterest, tumblr, booking: id first, then pw
 
 bungaejangtau_window_dump_23:33:18.519619.xml  -  2
 instagram_window_dump_12:37:12.845422.xml  -  2

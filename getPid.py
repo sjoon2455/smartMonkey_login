@@ -4,7 +4,6 @@ import subprocess
 ### input: string, partial name of certain process
 ### output: -
 ### get pid of certain process
-
 def pcGetPid(process):
     cmd = "ps | grep {0}".format(process)
     proc = subprocess.Popen(
@@ -23,6 +22,9 @@ def pcGetPid(process):
     res = ps[:index]
     return int(res)
 
+### input: string, partial name of certain process
+### output: -
+### get pid of certain process
 def androidGetPid(process):
     cmd = "adb shell ps | grep {0}".format(process)
     proc = subprocess.Popen(
@@ -35,8 +37,8 @@ def androidGetPid(process):
     #out = shell         6468  1987 1188536  72988 binder_thread_read abe8eac4 S com.android.commands.monkey
     #out = b'shell        13605  1987 1188920  74500 binder_thread_read ab9edac4 S com.android.commands.monkey'
     #print(type(out), out)
+    
     decode_out = out.decode('utf-8')
-    #print(type(decode_out), decode_out)
     decode_out_split = decode_out.split(" ")
     index = getIndex2(decode_out_split)
     res = decode_out_split[index]
