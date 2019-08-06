@@ -32,14 +32,29 @@ def androidGetPid(process):
         stderr = subprocess.PIPE
     )
     out, err = proc.communicate()
-    out = b'shell         6468  1987 1188536  72988 binder_thread_read abe8eac4 S com.android.commands.monkey\n'
+    #out = shell         6468  1987 1188536  72988 binder_thread_read abe8eac4 S com.android.commands.monkey
+    #out = b'shell        13605  1987 1188920  74500 binder_thread_read ab9edac4 S com.android.commands.monkey'
     #print(type(out), out)
     decode_out = out.decode('utf-8')
     #print(type(decode_out), decode_out)
     decode_out_split = decode_out.split(" ")
-    #print(decode_out_split[9])
-    res = decode_out_split[9]
+    index = getIndex2(decode_out_split)
+    res = decode_out_split[index]
     return int(res)
+
+### input: string
+### output: index
+### given a string, get an index where an integer starts
+def getIndex2(list):
+    count = -1
+    for i in list:
+        count += 1
+        try:
+            int(i)
+            return count
+        except ValueError:
+            continue
+            
 
 ### input: string
 ### output: int
@@ -55,4 +70,4 @@ def getIndex(ps):
             
 #print(getIndex("1 dsd")) # should print 1
 #print(pcGetPid("qemu"))
-androidGetPid("monkey")
+print(androidGetPid("monkey"))

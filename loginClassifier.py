@@ -10,8 +10,8 @@ def main():
     xml = dumpXml()
     #이 알고리즘을 짜야함. xml에 로그인이 있으면? 등등으로. 그래서 불리안으로 넘겨주고,
     if isLoginGUI(xml):
-        xmlList = getXml()
-        suspendAlarmResume(xmlList)
+        parsedList = getXml()
+        suspendAlarmResume(parsedList)
 
 
 ### boolean function, whether a given xml if login or not
@@ -22,14 +22,7 @@ def isLoginGUI(xml):
     parsedList = parseXml(xml, omit)
     count = 0
     for p in parsedList:
-        #if 'Login' or 'login' or 'Log in' or 'log in' or 'password' or 'PASSWORD' or '비밀번호' or '로그인' in p:
-        #if 'Login' or 'login' or 'Log in' or 'log in' or 'password' or 'PASSWORD' or '비밀번호' in p:
-        #if 'Login' or 'login' or 'Log in' or 'log in' or 'password' or 'PASSWORD' in p:
-        #if 'Login' or 'login' or 'Log in' or 'log in' or 'password' in p:
-        #if 'Login' or 'login' or 'Log in' or 'log in' in p:
-        #if 'Login' or 'login' or 'Log in' in p:
         if 'Login' or 'login' in p:
-        #if 'login' in p:
             count += 1
     if count > 0:
         return 1

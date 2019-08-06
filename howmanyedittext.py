@@ -1,3 +1,4 @@
+#-*- coding:utf-8 -*-
 import os
 import subprocess
 from loginClassifier import parseXml
@@ -47,7 +48,7 @@ def isLoginGUI(xml):
         #if 'Login' or 'login' or 'Log in' or 'log in' or 'password' in p:
         #if 'Login' or 'login' or 'Log in' or 'log in' in p:
         #if 'Login' or 'login' or 'Log in' in p:
-        if 'Login' or 'login' in p:
+        if 'Login' or 'login' or '로그인' in p:
         #if 'login' in p:
             count += 1
     if count > 0:
