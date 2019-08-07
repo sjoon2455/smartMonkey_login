@@ -1,0 +1,5 @@
+Tried the following:
+adb shell dumpsys activity | grep realActivity
+
+Out of 10 apps, 
+instagram, discord: no information of login

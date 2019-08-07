@@ -22,7 +22,7 @@ def typeIdPwd(parsedList, id, pwd):
         typeToPos(pwd)
     
     else:
-        #이런 경우가 있긴 함..Flo ㅠ editText 개수 3개임 ㅠ
+        #이런 경우가 있긴 함..Flo ㅠ editText 개수 3개임 ㅠ Flo는 버리자.
         return 1
 
 ### input: list of string of each node
