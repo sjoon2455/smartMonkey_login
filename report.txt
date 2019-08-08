@@ -1,8 +1,5 @@
-Out of 20 apps that are manually chosen and requires login information,
-quora: popup (does it matter?)
-facebook: 노답
-pinterest, tumblr, booking: id first, then pw
-
+13605
+Pw_pinterest_window_dump_23:29:15.060764.xml  -  1
 bungaejangtau_window_dump_23:33:18.519619.xml  -  2
 instagram_window_dump_12:37:12.845422.xml  -  2
 Flo_window_dump_15:28:53.774009.xml  -  3
@@ -22,5 +19,6 @@ pinterest_window_dump_23:28:48.156281.xml  -  1
 facebook_window_dump_17:52:51.034491.xml  -  0
 quora_window_dump_14:59:10.703008.xml  -  2
 booking_window_dump_15:56:12.286220.xml  -  1
-pinterest_window_dump_23:29:15.060764.xml  -  1
+Pw_tumblr_window_dump_23:20:26.496271.xml  -  2
+Pw_booking_window_dump_23:09:37.034127.xml  -  1
 bae-min_window_dump_15:34:20.157501.xml  -  2

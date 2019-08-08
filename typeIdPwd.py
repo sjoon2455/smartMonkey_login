@@ -35,10 +35,11 @@ def typeIdPwd(parsedList, id, pwd):
 def getEditText(parsedList):
     list_of_editText = []
     for p in parsedList:
+        #print(p)
         # if 'EditText' class
         if isEditTextClass(p):
             list_of_editText.append(p)   
-    return parsedList
+    return list_of_editText
     
 
 ### input: list of string, node with class of EditText
@@ -58,11 +59,10 @@ def isEditTextClass(p):
             if ps[1][i] == '"':
                 index = i
                 break
-        if 'EditText' in ps[1][:index]:
+        # consider every subclass of EditText
+        if 'EditText' in ps[1][:index] or 'AutoCompleteTextView' in ps[1][:index] or 'ExtractEditText' in ps[1][:index] or 'MultiAutoCompleteTextView' in ps[1][:index]:
+            #print(ps[1][:index])
             return 1
-        else:
-            return 0
-    # 이런 경우는 없긴 할텐데
     else:
         return 0
 

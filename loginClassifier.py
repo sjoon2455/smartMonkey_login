@@ -2,7 +2,7 @@
 import subprocess
 from dumpXml import dumpXml
 from sendAlarm import suspendAlarmResume
-
+from typeIdPwd import isEditTextClass
 
 ### main function!
 ### get current GUI xml. If it's login page, do what I want.
@@ -33,8 +33,6 @@ def isLoginGUI(parsedList):
 ### input: parsed list
 ### output: boolean
 def isPwGUI(parsedList):
-    #omit = ['index', 'package', 'checkable', 'checked', 'clickable', 'enabled', 'focusable', 'focused', 'scrollable', 'long-clickable', 'password', 'selected', 'bounds', ]
-    #parsedList = parseXml(xml, omit)
     count = 0
     for p in parsedList:
         if 'password' or 'Password' in p:
@@ -59,22 +57,24 @@ def getXml():
     return parsedList
     
 
-### parse the given xml
+### parse the given xml with only View and editText class
 ### input: bytes xml file, attributes to be omitted
-### output: .txt parsed xml file
+### output: list of string of parsed xml file
 def parseXml(xml, omit):
     pr = xml.decode('utf-8').split('<')
     parsedList = []
     for p in pr:
         #extracting only VIEWs
         li = ''
-        if isViewClass(p):
-        #if 'view' in p or 'View' in p:
+        if isViewClass(p) or isEditTextClass(p):
+        #if isViewClass(p):            
             ll = p.split(' ')
             for l in ll:
+                llhs = l.split("=")[0]
+                #lrhs = l.split("=")[1]
                 count = 0
                 for ele in omit:
-                    if ele in l:
+                    if ele in llhs:
                         count += 1
                 if count == 0:
                     li += l+" "
