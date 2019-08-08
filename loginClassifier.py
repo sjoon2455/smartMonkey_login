@@ -3,6 +3,8 @@ import subprocess
 from dumpXml import dumpXml
 from sendAlarm import suspendAlarmResume
 from typeIdPwd import isEditTextClass
+from isGui import isLoginGUI, isPwGui
+from isWhichClassText import isViewClass
 
 ### main function!
 ### get current GUI xml. If it's login page, do what I want.
@@ -12,36 +14,6 @@ def main():
     if isLoginGUI(xml):
         parsedList = getXml()
         suspendAlarmResume(parsedList)
-
-
-### boolean function, whether a given xml if login or not
-### input: parsed list
-### output: boolean
-def isLoginGUI(parsedList):
-    #omit = ['index', 'package', 'checkable', 'checked', 'clickable', 'enabled', 'focusable', 'focused', 'scrollable', 'long-clickable', 'password', 'selected', 'bounds', ]
-    #parsedList = parseXml(xml, omit)
-    count = 0
-    for p in parsedList:
-        if 'Login' or 'login' in p:
-            count += 1
-    if count > 0:
-        return 1
-    else:
-        return 0
-
-### boolean function, whether a given xml if password enter or not
-### input: parsed list
-### output: boolean
-def isPwGUI(parsedList):
-    count = 0
-    for p in parsedList:
-        if 'password' or 'Password' in p:
-            count += 1
-    if count > 0:
-        return 1
-    else:
-        return 0
-
 
 
 ### get xml & parsing
@@ -83,17 +55,3 @@ def parseXml(xml, omit):
     parsedList = [i[5:-3] if i[-2] == ">" else i[5:] for i in parsedList] 
     return parsedList
 
-### boolean function, whether a class of p is view(or View)
-### input: string(each node of xml file)
-### output: boolean
-def isViewClass(p):
-    if 'class="' in p:
-        ps = p.split('class="')
-        for i in range(len(ps[1])):
-            if ps[1][i] == '"':
-                index = i
-                break
-        if 'view' in ps[1][:index] or 'View' in ps[1][:index]:
-            return 1
-    else:
-        return 0
