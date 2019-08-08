@@ -1,24 +1,23 @@
-13605
-Pw_pinterest_window_dump_23:29:15.060764.xml  -  1
-bungaejangtau_window_dump_23:33:18.519619.xml  -  2
-instagram_window_dump_12:37:12.845422.xml  -  2
-Flo_window_dump_15:28:53.774009.xml  -  3
-tumblr_window_dump_22:27:50.992098.xml  -  1
-reddit_window_dump_23:30:11.940395.xml  -  2
-airbnb_window_dump_23:30:46.720320.xml  -  2
-naver_window_dump_17:33:50.984185.xml  -  2
-coupang_window_dump_15:35:06.035935.xml  -  2
-korail_window_dump_17:36:17.974336.xml  -  2
-yogiyo_window_dump_17:37:46.074194.xml  -  2
-wemakeprice_dump_23:32:12.851178.xml  -  2
-cgv_window_dump_15:37:06.897370.xml  -  2
-daumcafe_window_dump_17:34:48.988676.xml  -  2
-discord_window_dump_15:47:12.061389.xml  -  2
-twitter_window_dump_12:41:28.691876.xml  -  2
-pinterest_window_dump_23:28:48.156281.xml  -  1
-facebook_window_dump_17:52:51.034491.xml  -  0
-quora_window_dump_14:59:10.703008.xml  -  2
-booking_window_dump_15:56:12.286220.xml  -  1
-Pw_tumblr_window_dump_23:20:26.496271.xml  -  2
-Pw_booking_window_dump_23:09:37.034127.xml  -  1
-bae-min_window_dump_15:34:20.157501.xml  -  2
+Pw_pinterest_window_dump_23:29:15.060764.xml  -  1  -  PW
+bungaejangtau_window_dump_23:33:18.519619.xml  -  2  -  ID & PW
+instagram_window_dump_12:37:12.845422.xml  -  2  -  ID & PW
+pinterest_window_dump_23:13:45.576264.xml  -  1  -  ID
+Flo_window_dump_15:28:53.774009.xml  -  3  -  WHATTHEHACK
+tumblr_window_dump_22:27:50.992098.xml  -  1  -  ID
+reddit_window_dump_23:30:11.940395.xml  -  2  -  ID & PW
+airbnb_window_dump_23:30:46.720320.xml  -  2  -  ID & PW
+naver_window_dump_17:33:50.984185.xml  -  2  -  ID & PW
+coupang_window_dump_15:35:06.035935.xml  -  2  -  ID & PW
+korail_window_dump_17:36:17.974336.xml  -  2  -  ID & PW
+yogiyo_window_dump_17:37:46.074194.xml  -  2  -  ID & PW
+wemakeprice_dump_23:32:12.851178.xml  -  2  -  ID & PW
+cgv_window_dump_15:37:06.897370.xml  -  2  -  ID & PW
+daumcafe_window_dump_17:34:48.988676.xml  -  2  -  ID & PW
+discord_window_dump_15:47:12.061389.xml  -  2  -  ID & PW
+twitter_window_dump_12:41:28.691876.xml  -  2  -  ID & PW
+facebook_window_dump_17:52:51.034491.xml  -  0  -  WHATTHEHACK
+quora_window_dump_14:59:10.703008.xml  -  2  -  ID & PW
+booking_window_dump_15:56:12.286220.xml  -  1  -  ID
+Pw_tumblr_window_dump_23:20:26.496271.xml  -  2  -  ID & PW
+Pw_booking_window_dump_23:09:37.034127.xml  -  1  -  PW
+bae-min_window_dump_15:34:20.157501.xml  -  2  -  ID & PW

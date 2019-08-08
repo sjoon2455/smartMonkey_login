@@ -35,7 +35,7 @@ def androidGetPid(process):
     )
     out, err = proc.communicate()
     #out = shell         6468  1987 1188536  72988 binder_thread_read abe8eac4 S com.android.commands.monkey
-    out = b'shell        13605  1987 1188920  74500 binder_thread_read ab9edac4 S com.android.commands.monkey'
+    #out = b'shell        13605  1987 1188920  74500 binder_thread_read ab9edac4 S com.android.commands.monkey'
     #print(type(out), out)
     
     decode_out = out.decode('utf-8')
@@ -72,4 +72,4 @@ def getIndex(ps):
             
 #print(getIndex("1 dsd")) # should print 1
 #print(pcGetPid("qemu"))
-print(androidGetPid("monkey"))
+#print(androidGetPid("monkey"))

@@ -2,6 +2,7 @@
 import subprocess
 from locateIdPwd import locateId, locatePwd
 from isWhichClassText import isEditTextClass
+from isGui import isPwGUI
 
 ### type id or pwd in the android according to number of editText
 ### input: id(str), password(str), page description(parsed list-of-string)
@@ -9,25 +10,35 @@ from isWhichClassText import isEditTextClass
 def typeIdPwd(parsedList, id, pwd):
     list_of_editText = getEditText(parsedList)
     numEditText = len(list_of_editText)
+    # isLoginGui 는 이미 충족함!
     # 하나 있고 그게 비밀번호
-    if numEditText == 1 & isPwGui(parsedList):
+    if numEditText == 1 and isPwGUI(parsedList):
+        return "PW"
+        '''
         locatePwd(list_of_editText)
         typeToPos(pwd)
-
-    # 하나 있고 그게 로그인
-    if numEditText == 1 & isLoginGui(parsedList):
+        '''
+    # 하나 있고 그게 아이디
+    if numEditText == 1:
+        return "ID"
+        '''
         locateId(list_of_editText)
         typeToPos(id)
+        '''
     # 두 개 있고 각각 로그인, 비밀번호
-    elif numEditText == 2:
+    if numEditText == 2:
+        '''
         locateId(list_of_editText)
         typeToPos(id)
         locatePwd(list_of_editText)
         typeToPos(pwd)
+        '''
+        return "ID & PW"
     
     else:
         #Flo 랑 Facebook 있는데 Facebook 은 커버 가능! 이건 해결해야 할 문제임
-        return 1
+        #return 1
+        return "WHATTHEHACK"
 
 
 

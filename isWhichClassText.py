@@ -50,3 +50,21 @@ def isEditTextClass(p):
             return 1
     else:
         return 0
+
+
+### input: string, each node
+### output: boolean
+### whether a given string has Button as its class value
+def isButtonClass(p):
+    if 'class="' in p:
+        ps = p.split('class="')
+        for i in range(len(ps[1])):
+            if ps[1][i] == '"':
+                index = i
+                break
+        # consider every subclass of EditText
+        if 'Button' in ps[1][:index]:
+            #print(ps[1][:index])
+            return 1
+    else:
+        return 0

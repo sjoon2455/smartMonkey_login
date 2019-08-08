@@ -3,8 +3,8 @@ import subprocess
 from dumpXml import dumpXml
 from sendAlarm import suspendAlarmResume
 from typeIdPwd import isEditTextClass
-from isGui import isLoginGUI, isPwGui
-from isWhichClassText import isViewClass
+from isGui import isLoginGUI, isPwGUI
+from isWhichClassText import isViewClass, isButtonClass
 
 ### main function!
 ### get current GUI xml. If it's login page, do what I want.
@@ -21,7 +21,7 @@ def main():
 ### output: list of string
 def getXml():
     out = dumpXml()
-    omit = ['index', 'package', 'checkable', 'checked', 'clickable', 'enabled', 'focusable', 'focused', 'scrollable', 'long-clickable', 'password', 'selected', 'bounds', ]
+    omit = ['index', 'package', 'checkable', 'checked', 'clickable', 'enabled', 'focusable', 'focused', 'scrollable', 'long-clickable', 'password', 'selected', 'bounds']
     parsedList = parseXml(out, omit)
     for i in parsedList:
         print(i+'\n')
@@ -36,22 +36,24 @@ def parseXml(xml, omit):
     pr = xml.decode('utf-8').split('<')
     parsedList = []
     for p in pr:
-        #extracting only VIEWs
         li = ''
-        if isViewClass(p) or isEditTextClass(p):
-        #if isViewClass(p):            
-            ll = p.split(' ')
+        if isViewClass(p) or isEditTextClass(p) or isButtonClass(p): 
+            ll = p.split(' ') # 아 이게 문제네 ㅠㅠㅠㅠㅠㅠ
             for l in ll:
-                llhs = l.split("=")[0]
-                #lrhs = l.split("=")[1]
+                llhs = l.split("=")[0]    
+            
                 count = 0
                 for ele in omit:
                     if ele in llhs:
                         count += 1
                 if count == 0:
+                    
                     li += l+" "
+            
             parsedList.append(li)   
     
     parsedList = [i[5:-3] if i[-2] == ">" else i[5:] for i in parsedList] 
+    #for i in parsedList:
+    #    print(i)
     return parsedList
 
