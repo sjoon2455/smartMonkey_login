@@ -16,7 +16,9 @@ def isViewClass(p):
     else:
         return 0
 
-
+### boolean function, whether a text of p contains password
+### input: string(each node of xml file)
+### output: boolean
 def is_password_text(p):
     #print(p)
     if 'text="' in p:
