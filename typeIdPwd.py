@@ -1,6 +1,7 @@
 #-*- coding:utf-8 -*-
 import subprocess
 from locateIdPwd import locateId, locatePwd
+#from loginClassifier import isLoginGUI, isPwGui
 
 ### type id or pwd in the android according to number of editText
 ### input: id(str), password(str), page description(parsed list-of-string)
@@ -8,13 +9,16 @@ from locateIdPwd import locateId, locatePwd
 def typeIdPwd(parsedList, id, pwd):
     list_of_editText = getEditText(parsedList)
     numEditText = len(list_of_editText)
-    if numEditText == 1:
+    # 하나 있고 그게 비밀번호
+    if numEditText == 1 & isPwGui(parsedList):
+        locatePwd(list_of_editText)
+        typeToPos(pwd)
+
+    # 하나 있고 그게 로그인
+    if numEditText == 1 & isLoginGui(parsedList):
         locateId(list_of_editText)
         typeToPos(id)
-        # 몇몇 경우엔 id 먼저 치고, 다음 화면에서 비밀번호를 친다
-        #global id
-        #id = pwd
-
+    # 두 개 있고 각각 로그인, 비밀번호
     elif numEditText == 2:
         locateId(list_of_editText)
         typeToPos(id)
@@ -22,7 +26,7 @@ def typeIdPwd(parsedList, id, pwd):
         typeToPos(pwd)
     
     else:
-        #이런 경우가 있긴 함..Flo ㅠ editText 개수 3개임 ㅠ Flo는 버리자.
+        #Flo 랑 Facebook 있는데 Facebook 은 커버 가능! 이건 해결해야 할 문제임
         return 1
 
 ### input: list of string of each node
@@ -76,3 +80,36 @@ def typeToPos(idOrPwd):
     )
     out, err = proc.communicate()
     print("--------------Successfully typed in!--------------")
+
+
+
+
+### boolean function, whether a given xml if login or not
+### input: parsed list
+### output: boolean
+def isLoginGUI(parsedList):
+    #omit = ['index', 'package', 'checkable', 'checked', 'clickable', 'enabled', 'focusable', 'focused', 'scrollable', 'long-clickable', 'password', 'selected', 'bounds', ]
+    #parsedList = parseXml(xml, omit)
+    count = 0
+    for p in parsedList:
+        if 'Login' or 'login' in p:
+            count += 1
+    if count > 0:
+        return 1
+    else:
+        return 0
+
+### boolean function, whether a given xml if password enter or not
+### input: parsed list
+### output: boolean
+def isPwGUI(parsedList):
+    #omit = ['index', 'package', 'checkable', 'checked', 'clickable', 'enabled', 'focusable', 'focused', 'scrollable', 'long-clickable', 'password', 'selected', 'bounds', ]
+    #parsedList = parseXml(xml, omit)
+    count = 0
+    for p in parsedList:
+        if 'password' or 'Password' in p:
+            count += 1
+    if count > 0:
+        return 1
+    else:
+        return 0
