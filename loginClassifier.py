@@ -1,19 +1,21 @@
 #-*- coding:utf-8 -*-
 import subprocess
 from dumpXml import dumpXml
-from sendAlarm import suspendAlarmResume
+from sendAlarm import suspendAlarmResume, suspendAlarmResumeForFacebook
 from typeIdPwd import isEditTextClass
-from isGui import isLoginGUI, isPwGUI
+from isGui import isLoginGUI, isPwGUI, isLoginActivity
 from isWhichClassText import isViewClass, isButtonClass
 
 ### main function!
 ### get current GUI xml. If it's login page, do what I want.
 def main():
     xml = dumpXml()
-    #이 알고리즘을 짜야함. xml에 로그인이 있으면? 등등으로. 그래서 불리안으로 넘겨주고,
     if isLoginGUI(xml):
         parsedList = getXml()
         suspendAlarmResume(parsedList)
+    elif isLoginActivity():
+        # Consists of a single view as a whole, use image processing
+        suspendAlarmResumeForFacebook()
 
 
 ### get xml & parsing

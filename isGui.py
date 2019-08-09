@@ -1,4 +1,5 @@
 #-*- coding:utf-8 -*-
+import subprocess
 from isWhichClassText import is_password_text
 
 ### boolean function, whether a given xml if login or not
@@ -32,3 +33,22 @@ def isPwGUI(parsedList):
         return 1
     else:
         return 0
+
+### boolean function, whether current top activity is login activity or not
+### input: -
+### output: boolean
+def isLoginActivity():
+    cmd = "adb shell dumpsys activity | grep realActivity"
+    proc = subprocess.Popen(
+        cmd,
+        shell = True,
+        stdout = subprocess.PIPE,
+        stderr = subprocess.PIPE
+    )
+    out, err = proc.communicate()
+    decoded = out.decode("utf-8")
+    activity_list = decoded.replace(" ", "")
+    current_activity = activity_list.split("\n")[0]
+    return 'login' in current_activity or 'Login' in current_activity
+
+#print(isLoginActivity())
