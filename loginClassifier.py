@@ -5,6 +5,7 @@ from sendAlarm import suspendAlarmResume, suspendAlarmResumeForFacebook
 from typeIdPwd import isEditTextClass
 from isGui import isLoginGUI, isPwGUI, isLoginActivity
 from isWhichClassText import isViewClass, isButtonClass
+from parseSplitList import parseSplitList
 
 ### main function!
 ### get current GUI xml. If it's login page, do what I want.
@@ -40,7 +41,8 @@ def parseXml(xml, omit):
     for p in pr:
         li = ''
         if isViewClass(p) or isEditTextClass(p) or isButtonClass(p): 
-            ll = p.split(' ') # 아 이게 문제네 ㅠㅠㅠㅠㅠㅠ
+            ll = p.split(' ')
+            ll = parseSplitList(ll)
             for l in ll:
                 llhs = l.split("=")[0]    
             

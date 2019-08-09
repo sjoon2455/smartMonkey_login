@@ -15,8 +15,8 @@ def main_isPwGui():
     
     for file in os.listdir(directory):
         filename = os.fsdecode(file)
-        #if filename.endswith(".xml") & filename.startswith("Pw_tumblr"): 
-        if filename.endswith(".xml"):
+        if filename.endswith(".xml") & filename.startswith("Pw_tumblr"): 
+        #if filename.endswith(".xml"):
             cmd = 'cat {0}'.format(filename)
             proc = subprocess.Popen(
                 cmd, 
@@ -28,7 +28,8 @@ def main_isPwGui():
             omit = ['index', 'package', 'checkable', 'checked', 'clickable', 'enabled', 'focusable', 'focused', 'scrollable', 'long-clickable', 'password', 'selected']
             #print(type(out))
             out = parseXml(out, omit)
-            print(filename, " - ", isPwGUI(out))
+            print(out)
+            #print(filename, " - ", isPwGUI(out))
     
 
 def main_numEditText():
@@ -128,7 +129,7 @@ def main_facebook():
 
 
 #main_numEditText()
-#main_isPwGui()
+main_isPwGui()
 #main_isLoginGui()
-main_typeIdPwd()
+#main_typeIdPwd()
 #main_facebook()
