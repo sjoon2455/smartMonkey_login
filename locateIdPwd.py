@@ -1,5 +1,6 @@
 #-*- coding:utf-8 -*-
 import subprocess
+from printPretty import printPretty
 ### xml dump 한 걸로 editText 개수 찾아냄, 한 개면 ID만 넣고, 두 개면 ID, PWD
 
 ### input: list of string, node with class of EditText
@@ -35,7 +36,9 @@ def locateId(list_of_EditText):
         stdout = subprocess.PIPE,
         stderr = subprocess.PIPE
     )
-    print('----------------Entering ID.....----------------')
+    proc.communicate()
+    printPretty("Touched ID.....")
+    #print('----------------Touched ID.....----------------')
     return 1
 
 
@@ -73,7 +76,9 @@ def locatePwd(list_of_EditText):
         stdout = subprocess.PIPE,
         stderr = subprocess.PIPE
     )
-    print('----------------Entering PWD.....----------------')
+    proc.communicate()
+    printPretty("Touched PWD.....")
+    #print('----------------Touched PWD.....----------------')
     return 1
 
 

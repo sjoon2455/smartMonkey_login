@@ -1,34 +1,65 @@
 #-*- coding:utf-8 -*-
-import subprocess
+import os
+import filecmp
 from dumpXml import dumpXml
-from sendAlarm import suspendAlarmResume, suspendAlarmResumeForFacebook
-from typeIdPwd import isEditTextClass
+from sendAlarm import suspendAlarmResume
+from typeIdPwd import isEditTextClass, doSame
 from isGui import isLoginGUI, isPwGUI, isLoginActivity
 from isWhichClassText import isViewClass, isButtonClass
 from parseSplitList import parseSplitList
+from printPretty import printPretty
 
 ### main function!
 ### get current GUI xml. If it's login page, do what I want.
 def main():
+    #print(3)
     xml = dumpXml()
-    if isLoginGUI(xml):
-        parsedList = getXml()
-        suspendAlarmResume(parsedList)
+    parsedList = getXml()
+    if isLoginGUI(parsedList):
+        if isSameGUI(xml):
+            doSame(parsedList)
+        else:
+            suspendAlarmResume(parsedList)
+    '''
     elif isLoginActivity():
         # Consists of a single view as a whole, use image processing
         suspendAlarmResumeForFacebook()
+    '''
+
+### checks if it's the same GUI
+### input: xml description of GUI
+### output: boolean
+def isSameGUI(xml):
+    printPretty("Have we met before?")
+    #print("----------------------Have we met before?----------------------")
+    print("isSameGUI", os.getcwd())
+    cwd = os.getcwd() + '/xmlDump'
+    os.chdir(cwd)
+    directory = os.fsencode(cwd)
+    
+    for file in os.listdir(directory):
+        filename = os.fsdecode(file)
+        if filename.endswith(".xml"): 
+            res = filecmp.cmp(file, xml)
+            if res:
+                os.chdir("..")
+                return True
+    os.chdir("..")
+    return False    
+    
 
 
-### get xml & parsing
+### dump xml & parsing
 ### input: none
 ### output: list of string
 def getXml():
     out = dumpXml()
     omit = ['index', 'package', 'checkable', 'checked', 'clickable', 'enabled', 'focusable', 'focused', 'scrollable', 'long-clickable', 'password', 'selected', 'bounds']
     parsedList = parseXml(out, omit)
-    for i in parsedList:
-        print(i+'\n')
-    print('--------------Getting xml hierarchy and parsing...--------------')
+    #for i in parsedList:
+    #    print(i+'\n')
+    printPretty("Getting xml hierarchy and parsing...")
+    #dprint('--------------Getting xml hierarchy and parsing...--------------')
     return parsedList
     
 
@@ -36,6 +67,7 @@ def getXml():
 ### input: bytes xml file, attributes to be omitted
 ### output: list of string of parsed xml file
 def parseXml(xml, omit):
+    #print(3)
     pr = xml.decode('utf-8').split('<')
     parsedList = []
     for p in pr:

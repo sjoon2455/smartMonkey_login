@@ -4,23 +4,31 @@ import os
 import psutil
 from typeIdPwd import typeIdPwd
 from getPid import androidGetPid
+from printPretty import printPretty
 
 ### input: parsed list of xml file
 ### output: -
 ### during some job... if loginpage occured, this function need to be called
 def suspendAlarmResume(parsedList):
-    # 일단 Monkey로
-    monkey_pid = androidGetPid("monkey")
+    #monkey_pid = androidGetPid("monkey")
+    monkey_pid = androidGetPid("naiveMonkey")
     cmd = "adb shell kill -STOP {0}".format(monkey_pid)
-    subprocess.call(cmd, shell = True)
-    subprocess.call("say 'beep'", shell = True) #beep
+    printPretty("Just stopped monkey travel")
+    #print("----------------------Just stopped monkey travel----------------------")
+    proc1 = subprocess.call(cmd, shell = True)
+    proc1.communicate()
+    proc2 = subprocess.call("say 'beep'", shell = True) #beep
+    proc2.communicate()
     # get id, pwd from user and type them in. 
-    user_id = input("ID: ")
+    user_id = input("ID: \n(If not a login page, press return button with empty input)")
     user_pw = input("PASSWORD: \n(If none, press return button with empty input)")
     typeIdPwd(parsedList, user_id, user_pw)
+    #print("----------------------Now continue monkey travel----------------------")
+    printPretty("Now continue monkey travel")
     cmd = "adb shell kill -CONT {0}".format(monkey_pid)
     subprocess.call(cmd, shell = True)
 
+'''
 ### input: -
 ### output: -
 ### during some job... if loginpage occured, this function need to be called. In case of facebook.
@@ -37,7 +45,7 @@ def suspendAlarmResumeForFacebook():
     
     cmd = "adb shell kill -CONT {0}".format(monkey_pid)
     subprocess.call(cmd, shell = True)
-
+'''
 
 ### Just for test. It works!
 def Test():

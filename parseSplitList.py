@@ -22,7 +22,7 @@ def parseSplitList(li):
     while i < len(li):
         if "=" not in li[i]:
             li = appendTail_pull(li, i)
-            print(i, " - ", li)
+            #print(i, " - ", li) 
         else:
             i += 1
     return li

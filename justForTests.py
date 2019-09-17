@@ -1,13 +1,15 @@
 #-*- coding:utf-8 -*-
-import os
-import subprocess
-from loginClassifier import parseXml
-from isGui import isLoginGUI, isPwGUI
-from typeIdPwd import numEditText, typeIdPwd
 
+#import os
+#import subprocess
+#from loginClassifier import parseXml
+#from isGui import isLoginGUI, isPwGUI
+#from typeIdPwd import numEditText, typeIdPwd
+
+import time
 
         
-
+'''
 def main_isPwGui():
     cwd = os.getcwd() + '/xmlDump'
     os.chdir(cwd)
@@ -126,10 +128,19 @@ def main_facebook():
             print(filename,' - ',isPwGUI(out))              # return 0
             print(filename,' - ',typeIdPwd(out, "", ""))    # return 1
             print(filename,' - ',numEditText(out))    # return 1
+'''
+def testOnly():
+    count = 0
+    while True:
+        if count == 100:
+            break
+        print("HI")
+        time.sleep(1)
+        count += 1
 
-
+testOnly()
 #main_numEditText()
-main_isPwGui()
+#main_isPwGui()
 #main_isLoginGui()
 #main_typeIdPwd()
 #main_facebook()
