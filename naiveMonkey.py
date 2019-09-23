@@ -6,7 +6,9 @@ import subprocess
 #from dumpScreenSize import dumpSS
 from loginClassifier import main
 from printPretty import printPretty
+import time
 
+start = time.time()
 num = int(sys.argv[1])
 
 try:    
@@ -69,4 +71,5 @@ while count < num:
         count += 1
     except Exception as e:
         print(e)
-        
+
+print("Code Execution Time: {0}".format(strat - time.time()))

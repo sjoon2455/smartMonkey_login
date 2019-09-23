@@ -30,16 +30,20 @@ def numEditText(parsedList):
 ### input: id(str), password(str), page description(parsed list-of-string)
 ### output: -
 def typeIdPwd(parsedList, id, pwd):
+    #print(parsedList)
     list_of_editText = getEditText(parsedList)
+    #print(list_of_editText)
     numEditText = len(list_of_editText)
     # isLoginGui 는 이미 충족함!
     
     # 로그인 페이지가 아님
     if id == "" and pwd == "":
+        printPretty("Not a login GUI!")
         return 1
     
     # 하나 있고 그게 비밀번호
     if numEditText == 1 and isPwGUI(parsedList):
+        printPretty("Only PWD")
         #return "PW"
         onlyPw(list_of_editText, pwd)
         record(parsedList, id, pwd, "pwd")
@@ -47,27 +51,34 @@ def typeIdPwd(parsedList, id, pwd):
 
     # 하나 있고 그게 아이디
     if numEditText == 1:
+        printPretty("Only ID")
         #return "ID"
-        onlyId()
+        onlyId(list_of_editText, id)
         record(parsedList, id, pwd, "id")
         return 0
 
     # 두 개 있고 각각 로그인, 비밀번호
     if numEditText == 2:
-        IdPw()
+        printPretty("ID & PWD both exists")
+        #print(3)
+        IdPwd(list_of_editText, id, pwd)
+        #print(4)
         record(parsedList, id, pwd, "idpwd")
         return 0
         #return "ID & PW"
     
     else:
+        printPretty("What is this?")
         return 1
 
 ### check whether there exists an lower folder /record, and record.txt inside it. If not, create one
 ### input: boolean
 ### output: -
 def checkRecord():
-    dirName = "record"
+    #print(6)
+    #dirName = "record"
     fileName = "record.txt"
+    '''
     try:
         os.mkdir(dirName)
         print("Directory " , dirName ,  " Created ")
@@ -76,16 +87,17 @@ def checkRecord():
     
     cwd = os.getcwd() + '/record'
     os.chdir(cwd)
+    '''
 
     try:
         file = open(fileName, "r")
-        print("File " , fileName ,  " already exists ")
-        os.chdir("..")
+        printPretty("File {0} already exists".format(fileName))
+        #os.chdir("..")
         return 0
     except IOError:
         file = open(fileName, "w")
         print("File " , fileName ,  " Created ")
-        os.chdir("..")
+        #os.chdir("..")
         return 0
 
 
@@ -93,19 +105,20 @@ def checkRecord():
 ### input: an information of loginGUI, typed id and password, type of typed one(s)
 ### output: modified file
 def record(parsedList, id, pwd, identity):
+    #print(5)
     checkRecord()
     cwd = os.getcwd()
     directory = os.fsencode(cwd)
     for file in os.listdir(directory):
         filename = os.fsdecode(file)
-        if filename.endswith(".txt"): 
+        if filename == "record.txt": 
             content = open(file, "a")
             content.write("\n" + str(parsedList))
             content.write("\n" + identity)
             content.write("\n" + id)
             content.write("\n" + pwd)
             content.close()
-    os.chdir('..')
+    #os.chdir('..')
     return 0
 
 
@@ -113,7 +126,7 @@ def record(parsedList, id, pwd, identity):
 ### input: list of editText, password
 ### output: -
 def onlyPw(list_of_editText, pwd):
-    locatePwd(list_of_editText)
+    locatePwd(list_of_editText[0])
     typeToPos(pwd)
     return 0
 
@@ -121,7 +134,7 @@ def onlyPw(list_of_editText, pwd):
 ### input: list of editText, id
 ### output: -
 def onlyId(list_of_editText, id):
-    locateId(list_of_editText)
+    locateId(list_of_editText[0])
     typeToPos(id)
     return 0
 
@@ -129,10 +142,18 @@ def onlyId(list_of_editText, id):
 ### input: list of editText, id, password
 ### output: -
 def IdPwd(list_of_editText, id, pwd):
-    locateId(list_of_editText)
+    #print(1)
+    #print(type(list_of_editText))
+    #print(list_of_editText)
+    
+    locateId(list_of_editText[0])
+    #print(2)
     typeToPos(id)
-    locatePwd(list_of_editText)
+    #print(3)
+    locatePwd(list_of_editText[1])
+    #print(44)
     typeToPos(pwd)    
+    #print(55)
     return 0
 
 ### input: string, id or pwd
@@ -159,10 +180,10 @@ def typeToPos(idOrPwd):
 def doSame(parsedList):
     printPretty("Then let me do the same")
     #print("----------------------Then let me do the same----------------------")
-    cwd = os.getcwd() + '/record'
-    os.chdir(cwd)
-    directory = os.fsencode(cwd)
-    
+    #cwd = os.getcwd() + '/record'
+    #os.chdir(cwd)
+    #directory = os.fsencode(cwd)
+    directory = os.fsencode(os.getcwd()+'/record')
     for file in os.listdir(directory):
         filename = os.fsdecode(file)
         if filename.endswith(".txt"): 
@@ -196,9 +217,9 @@ def doSame(parsedList):
             elif whichTyped == "idpwd":
                 IdPwd(list_of_editText, id, pwd)
             else:
-                os.chdir("..")
+                #os.chdir("..")
                 return "NO MATCH... ABORT AND CONTINUE"
-            os.chdir("..")
+            #os.chdir("..")
             return "GOT FROM THE HISTORY! NOW CONTINUE"
             
 #record(['1','2'], "id", "pwd", "id")

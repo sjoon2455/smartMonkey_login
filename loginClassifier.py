@@ -16,9 +16,12 @@ def main():
     xml = dumpXml()
     parsedList = getXml()
     if isLoginGUI(parsedList):
+        #여기까지는 오케이
         if isSameGUI(xml):
+            #print(123123)
             doSame(parsedList)
         else:
+            #여기까지는 오케이
             suspendAlarmResume(parsedList)
     '''
     elif isLoginActivity():
@@ -31,8 +34,7 @@ def main():
 ### output: boolean
 def isSameGUI(xml):
     printPretty("Have we met before?")
-    #print("----------------------Have we met before?----------------------")
-    print("isSameGUI", os.getcwd())
+    
     cwd = os.getcwd() + '/xmlDump'
     os.chdir(cwd)
     directory = os.fsencode(cwd)
@@ -40,11 +42,16 @@ def isSameGUI(xml):
     for file in os.listdir(directory):
         filename = os.fsdecode(file)
         if filename.endswith(".xml"): 
-            res = filecmp.cmp(file, xml)
+            with open(filename) as others:
+                res = others.read() == xml
+                print(res)
+            
             if res:
                 os.chdir("..")
                 return True
+    
     os.chdir("..")
+    
     return False    
     
 
@@ -54,7 +61,7 @@ def isSameGUI(xml):
 ### output: list of string
 def getXml():
     out = dumpXml()
-    omit = ['index', 'package', 'checkable', 'checked', 'clickable', 'enabled', 'focusable', 'focused', 'scrollable', 'long-clickable', 'password', 'selected', 'bounds']
+    omit = ['index', 'package', 'checkable', 'checked', 'clickable', 'enabled', 'focusable', 'focused', 'scrollable', 'long-clickable', 'password', 'selected']
     parsedList = parseXml(out, omit)
     #for i in parsedList:
     #    print(i+'\n')
@@ -93,3 +100,4 @@ def parseXml(xml, omit):
     #    print(i)
     return parsedList
 
+main()

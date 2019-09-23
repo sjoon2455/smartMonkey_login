@@ -2,6 +2,7 @@
 import subprocess
 from isWhichClassText import is_password_text
 from printPretty import printPretty
+from typeIdPwd import numEditText
 ### boolean function, whether a given xml if login or not
 ### input: parsed list
 ### output: boolean
@@ -11,11 +12,12 @@ def isLoginGUI(parsedList):
     #print("----------------------Checking whether it's login GUI----------------------")
     printPretty("Checking whether it's login GUI")
     count = 0
+    num = numEditText(parsedList)
     for p in parsedList:
         #print(p)
         if 'Login' in p or 'login' in p or 'Log in' in p or 'Log In' in p or 'email' in p or '로그인' in p:
             count += 1
-    if count > 0:
+    if count > 0 and num != 0:
         return 1
     else:
         return 0
@@ -29,6 +31,7 @@ def isPwGUI(parsedList):
     #parsedList = parseXml(xml, omit)
     #print("----------------------Checking whether it's password GUI----------------------")
     printPretty("Checking whether it's password GUI")
+    print(parsedList)
     count = 0
     for p in parsedList:
         if is_password_text(p):

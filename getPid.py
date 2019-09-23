@@ -40,8 +40,10 @@ def androidGetPid(process):
     
     decode_out = out.decode('utf-8')
     decode_out_split = decode_out.split(" ")
+    print(decode_out_split)
     index = getIndex2(decode_out_split)
     res = decode_out_split[index]
+    print(444)
     return int(res)
 
 ### input: string
@@ -72,4 +74,4 @@ def getIndex(ps):
             
 #print(getIndex("1 dsd")) # should print 1
 #print(pcGetPid("qemu"))
-#print(androidGetPid("monkey"))
+#print(pcGetPid("naiveMonkey"))
