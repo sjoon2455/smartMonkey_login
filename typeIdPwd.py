@@ -12,7 +12,7 @@ from printPretty import printPretty
 def getEditText(parsedList):
     list_of_editText = []
     for p in parsedList:
-        #print(p)
+        
         # if 'EditText' class
         if isEditTextClass(p):
             list_of_editText.append(p)   
@@ -30,9 +30,9 @@ def numEditText(parsedList):
 ### input: id(str), password(str), page description(parsed list-of-string)
 ### output: -
 def typeIdPwd(parsedList, id, pwd):
-    #print(parsedList)
+    
     list_of_editText = getEditText(parsedList)
-    #print(list_of_editText)
+    
     numEditText = len(list_of_editText)
     # isLoginGui 는 이미 충족함!
     
@@ -60,9 +60,9 @@ def typeIdPwd(parsedList, id, pwd):
     # 두 개 있고 각각 로그인, 비밀번호
     if numEditText == 2:
         printPretty("ID & PWD both exists")
-        #print(3)
+        
         IdPwd(list_of_editText, id, pwd)
-        #print(4)
+        
         record(parsedList, id, pwd, "idpwd")
         return 0
         #return "ID & PW"
@@ -75,19 +75,9 @@ def typeIdPwd(parsedList, id, pwd):
 ### input: boolean
 ### output: -
 def checkRecord():
-    #print(6)
-    #dirName = "record"
-    fileName = "record.txt"
-    '''
-    try:
-        os.mkdir(dirName)
-        print("Directory " , dirName ,  " Created ")
-    except FileExistsError:
-        print("Directory " , dirName ,  " already exists")
     
-    cwd = os.getcwd() + '/record'
-    os.chdir(cwd)
-    '''
+    fileName = "record.txt"
+    
 
     try:
         file = open(fileName, "r")
@@ -105,7 +95,7 @@ def checkRecord():
 ### input: an information of loginGUI, typed id and password, type of typed one(s)
 ### output: modified file
 def record(parsedList, id, pwd, identity):
-    #print(5)
+    
     checkRecord()
     cwd = os.getcwd()
     directory = os.fsencode(cwd)
@@ -142,18 +132,15 @@ def onlyId(list_of_editText, id):
 ### input: list of editText, id, password
 ### output: -
 def IdPwd(list_of_editText, id, pwd):
-    #print(1)
-    #print(type(list_of_editText))
-    #print(list_of_editText)
     
     locateId(list_of_editText[0])
-    #print(2)
+    
     typeToPos(id)
-    #print(3)
+    
     locatePwd(list_of_editText[1])
-    #print(44)
+    
     typeToPos(pwd)    
-    #print(55)
+    
     return 0
 
 ### input: string, id or pwd
@@ -161,7 +148,7 @@ def IdPwd(list_of_editText, id, pwd):
 ### type in a given id or pwd
 def typeToPos(idOrPwd):
     printPretty("Finally typing in!!!")
-    #print("----------------------Finally typing in!!!----------------------")
+    
     cmd = 'adb shell input text "{0}"'.format(idOrPwd)
     proc = subprocess.Popen(
         cmd,
@@ -171,7 +158,7 @@ def typeToPos(idOrPwd):
     )
     out, err = proc.communicate()
     printPretty("Successfully typed in!")
-    #print("--------------Successfully typed in!--------------")
+    
     return 0
 
 ### if same gui comes up again, do the same
@@ -179,7 +166,7 @@ def typeToPos(idOrPwd):
 ### output: -
 def doSame(parsedList):
     printPretty("Then let me do the same")
-    #print("----------------------Then let me do the same----------------------")
+    
     #cwd = os.getcwd() + '/record'
     #os.chdir(cwd)
     #directory = os.fsencode(cwd)
@@ -189,7 +176,7 @@ def doSame(parsedList):
         if filename.endswith(".txt"): 
             content = open(file, "r")
             lines = content.readlines()
-            #print(lines)
+            
             count = 1
             #index = 0
             for line in lines:
@@ -206,9 +193,6 @@ def doSame(parsedList):
             id = lines[index+1].replace("\n", "")            
             pwd = lines[index+2].replace("\n", "")
             list_of_editText = getEditText(parsedList)
-            #print(whichTyped)
-            #print(id)
-            #print(pwd)
             
             if whichTyped == "id":
                 onlyId(list_of_editText, id)

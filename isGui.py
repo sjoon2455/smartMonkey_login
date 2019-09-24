@@ -1,20 +1,37 @@
 #-*- coding:utf-8 -*-
 import subprocess
-from isWhichClassText import is_password_text
+from isWhichClassText import is_password_text, isEditTextClass
 from printPretty import printPretty
-from typeIdPwd import numEditText
+
+### input: list of string of each node
+### output: list of node with editText class
+### get only editText nodes
+def getEditText(parsedList):
+    list_of_editText = []
+    for p in parsedList:
+        
+        if isEditTextClass(p):
+            list_of_editText.append(p)   
+    return list_of_editText
+    
+
+### input: list of string, node with class of EditText
+### output: int
+### return number of editText class node
+def numEditText(parsedList):
+    list_of_editText = getEditText(parsedList)
+    return len(list_of_editText)  
+
 ### boolean function, whether a given xml if login or not
 ### input: parsed list
 ### output: boolean
 def isLoginGUI(parsedList):
-    #omit = ['index', 'package', 'checkable', 'checked', 'clickable', 'enabled', 'focusable', 'focused', 'scrollable', 'long-clickable', 'password', 'selected', 'bounds', ]
-    #parsedList = parseXml(xml, omit)
-    #print("----------------------Checking whether it's login GUI----------------------")
+    
     printPretty("Checking whether it's login GUI")
     count = 0
     num = numEditText(parsedList)
     for p in parsedList:
-        #print(p)
+        
         if 'Login' in p or 'login' in p or 'Log in' in p or 'Log In' in p or 'email' in p or '로그인' in p:
             count += 1
     if count > 0 and num != 0:
@@ -27,17 +44,16 @@ def isLoginGUI(parsedList):
 ### input: parsed list
 ### output: boolean
 def isPwGUI(parsedList):
-    #omit = ['index', 'package', 'checkable', 'checked', 'clickable', 'enabled', 'focusable', 'focused', 'scrollable', 'long-clickable', 'password', 'selected', 'bounds']
-    #parsedList = parseXml(xml, omit)
-    #print("----------------------Checking whether it's password GUI----------------------")
+    
     printPretty("Checking whether it's password GUI")
-    print(parsedList)
+    
     count = 0
+    num = numEditText(parsedList)
     for p in parsedList:
         if is_password_text(p):
-            #print(p)
+            
             count += 1
-    if count > 0:
+    if count > 0 and num != 0:
         return 1
     else:
         return 0
@@ -46,7 +62,7 @@ def isPwGUI(parsedList):
 ### input: -
 ### output: boolean
 def isLoginActivity():
-    #print("----------------------Checking whether it's login activity----------------------")
+    
     printPretty("Checking whether it's login activity")
     cmd = "adb shell dumpsys activity | grep realActivity"
     proc = subprocess.Popen(
@@ -61,4 +77,3 @@ def isLoginActivity():
     current_activity = activity_list.split("\n")[0]
     return 'login' in current_activity or 'Login' in current_activity
 
-#print(isLoginActivity())

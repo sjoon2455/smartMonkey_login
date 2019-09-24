@@ -12,16 +12,16 @@ from printPretty import printPretty
 ### main function!
 ### get current GUI xml. If it's login page, do what I want.
 def main():
-    #print(3)
+    
     xml = dumpXml()
     parsedList = getXml()
     if isLoginGUI(parsedList):
-        #여기까지는 오케이
+    
         if isSameGUI(xml):
-            #print(123123)
+    
             doSame(parsedList)
         else:
-            #여기까지는 오케이
+    
             suspendAlarmResume(parsedList)
     '''
     elif isLoginActivity():
@@ -44,7 +44,7 @@ def isSameGUI(xml):
         if filename.endswith(".xml"): 
             with open(filename) as others:
                 res = others.read() == xml
-                print(res)
+                
             
             if res:
                 os.chdir("..")
@@ -99,5 +99,3 @@ def parseXml(xml, omit):
     #for i in parsedList:
     #    print(i)
     return parsedList
-
-main()
